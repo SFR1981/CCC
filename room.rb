@@ -1,5 +1,5 @@
 class Room
-attr_reader :name, :songs, :guests, :capacity
+attr_reader :name, :songs, :guests, :capacity, :whoo_count
 attr_writer :songs
   def initialize(name, capacity)
 
@@ -7,6 +7,7 @@ attr_writer :songs
     @guests = []
     @songs = []
     @capacity = capacity
+    @whoo_count = 0
 
 
   end
@@ -15,12 +16,22 @@ attr_writer :songs
   def check_in_one_guest(guest)
     return if @guests.length() == @capacity
       @guests << guest
+      if @songs.include?(guest.favourite_song())
+        guest.whoo()
+        @whoo_count +=1
+      end
 
   end
 
   def check_in_multi_guests(multiple_guests)
     multiple_guests.each do |guest|
-      @guests << guest if @guests.length() < @capacity
+      return if @guests.length() == @capacity
+        @guests << guest
+        if @songs.include?(guest.favourite_song())
+          guest.whoo()
+          @whoo_count +=1
+        end
+    
     end
 
      #@guests += guests

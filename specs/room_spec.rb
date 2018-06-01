@@ -20,6 +20,7 @@ class RoomTest < MiniTest::Test
     @song2 = Song.new("Real American - Rick Derringer")
     @song3 = Song.new("Voices - Disturbed")
     @song4 = Song.new("Demanufacture - Fear Factory")
+    @song5 = Song.new("Set you free - n-trance")
     @playlist = [@song1,@song2,@song3,@song4]
 
 
@@ -107,6 +108,39 @@ class RoomTest < MiniTest::Test
      assert_equal([@guest5,@guest6,@guest1,@guest2,@guest3], @room.guests())
 
    end
+
+
+  def test_room_check_in_guess_guest_whoos__pass
+    @guest1.overwrite_favourite_song(@song3)
+    @room.add_playlist(@playlist)
+    @room.check_in_one_guest(@guest1)
+    assert_equal(1, @room.whoo_count())
+
+
+   end
+
+   def test_room_check_in_guess_guest_whoos__fail
+     @guest1.overwrite_favourite_song(@song5)
+     @room.add_playlist(@playlist)
+     @room.check_in_one_guest(@guest1)
+     assert_equal(0, @room.whoo_count())
+
+
+    end
+
+    def test_room_check_in_guess_guest_whoos__group
+      @guest1.overwrite_favourite_song(@song1)
+      @guest2.overwrite_favourite_song(@song2)
+      @guest3.overwrite_favourite_song(@song3)
+      @room.add_playlist(@playlist)
+      @room.check_in_multi_guests([@guest1,@guest2,@guest3])
+      
+      assert_equal(3, @room.whoo_count())
+
+
+     end
+
+
 
 
 

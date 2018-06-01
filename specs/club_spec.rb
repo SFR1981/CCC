@@ -80,6 +80,15 @@ class ClubTest < MiniTest::Test
 
   end
 
+  def test_club_gets_money_from_arriving_group
+    @ccc.arriving_group([@guest1,@guest2,@guest3,@guest4,@guest5])
+    assert_equal(25.00, @ccc.till())
+    assert_equal(95.00, @guest1.wallet())
+
+
+
+  end
+
   def test_customer_leaves
     @ccc.arriving_group([@guest1,@guest2,@guest3,@guest4,@guest5])
     @ccc.leaving_guest(@guest3)
