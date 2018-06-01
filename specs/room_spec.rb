@@ -9,11 +9,13 @@ class RoomTest < MiniTest::Test
 
   def setup
 
-    @room = Room.new("Room 1", "50")
-    @guest1 = Guest.new("Marti Pellow")
-    @guest2 = Guest.new("Dave")
-    @guest3 = Guest.new("Donatello")
-    @guest4 = Guest.new("Gordon")
+    @room = Room.new("Room 1", 5)
+    @guest1 = Guest.new("Marti Pellow", 100.00)
+    @guest2 = Guest.new("Dave", 25.00)
+    @guest3 = Guest.new("Donatello", 50.00)
+    @guest4 = Guest.new("Gordon", 20.00)
+    @guest5 = Guest.new("Shirley", 20.00)
+    @guest6 = Guest.new("Sonia", 20.00)
     @song1 = Song.new("Last Resort - Papa Roach")
     @song2 = Song.new("Real American - Rick Derringer")
     @song3 = Song.new("Voices - Disturbed")
@@ -68,10 +70,33 @@ class RoomTest < MiniTest::Test
   end
 
   def test_room_has_a_capacity
-    assert_equal("50", @room.capacity())
+    assert_equal(5, @room.capacity())
 
   end
 
+   def test_room_check_in_guest__not_at_capacity
+     @room.check_in_multi_guests([@guest1,@guest2,@guest3,@guest4])
+     @room.check_in_one_guest(@guest5)
+     assert_equal([@guest1,@guest2,@guest3,@guest4,@guest5], @room.guests())
+
+   end
+
+
+   def test_room_check_in_guest__at_capacity
+     @room.check_in_multi_guests([@guest1,@guest2,@guest3,@guest4])
+     @room.check_in_one_guest(@guest5)
+     @room.check_in_one_guest(@guest6)
+     assert_equal([@guest1,@guest2,@guest3,@guest4,@guest5], @room.guests())
+
+   end
+
+   def test_room_check_in_guest__at_capacity_multi
+     @room.check_in_one_guest(@guest5)
+     @room.check_in_one_guest(@guest6)
+     @room.check_in_multi_guests([@guest1,@guest2,@guest3,@guest4])
+     assert_equal([@guest5,@guest6,@guest1,@guest2,@guest3], @room.guests())
+
+   end
 
 
 

@@ -12,19 +12,23 @@ attr_reader :name, :songs, :guests, :capacity
 
 
   def check_in_one_guest(guest)
-
-    @guests << guest
+    return if @guests.length() == @capacity
+      @guests << guest
 
   end
 
-  def check_in_multi_guests(guests)
+  def check_in_multi_guests(multiple_guests)
+    multiple_guests.each do |guest|
+      @guests << guest if @guests.length() < @capacity
+    end
 
-     @guests += guests
+     #@guests += guests
   end
 
   def check_out_one_guest(guest)
-    removal = [guest]
-    @guests -= removal
+
+      removal = [guest]
+      @guests -= removal
 
   end
 
