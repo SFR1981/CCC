@@ -12,6 +12,12 @@ class ClubTest < MiniTest::Test
     @room1 = Room.new("Rock", 5)
     @room2 = Room.new("80s", 5)
     @room3 = Room.new("Tunes from hell", 5)
+    @song1 = Song.new("Last Resort - Papa Roach")
+    @song2 = Song.new("Real American - Rick Derringer")
+    @song3 = Song.new("Voices - Disturbed")
+    @song4 = Song.new("Demanufacture - Fear Factory")
+    @rock = [@song1, @song2, @song3, @song4]
+    @room1.add_playlist(@rock)
     @rooms = [@room1, @room2, @room3]
     @ccc = Club.new(@rooms, 5.00)
     @guest1 = Guest.new("Marti Pellow", 100.00)
@@ -92,8 +98,11 @@ class ClubTest < MiniTest::Test
   def test_club_guest_enters_room
     @room1.check_in_one_guest(@guest5)
     assert_equal([@guest5], @room1.guests())
-    
 
+  end
+
+  def test_room_has_songs
+    assert_equal(@rock, @room1.songs())
 
   end
 

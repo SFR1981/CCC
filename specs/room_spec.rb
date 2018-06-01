@@ -20,6 +20,7 @@ class RoomTest < MiniTest::Test
     @song2 = Song.new("Real American - Rick Derringer")
     @song3 = Song.new("Voices - Disturbed")
     @song4 = Song.new("Demanufacture - Fear Factory")
+    @playlist = [@song1,@song2,@song3,@song4]
 
 
   end
@@ -68,6 +69,15 @@ class RoomTest < MiniTest::Test
     assert_equal([@song2], @room.songs())
 
   end
+
+  def test_room_has_playlist_added
+
+
+    @room.add_playlist(@playlist)
+    assert_equal(@playlist, @room.songs())
+  end
+
+
 
   def test_room_has_a_capacity
     assert_equal(5, @room.capacity())
