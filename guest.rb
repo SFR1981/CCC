@@ -9,4 +9,11 @@ class Guest
 
   end
 
+
+  def spend(amount)
+
+    @wallet -= amount
+    
+  end
+
 end
