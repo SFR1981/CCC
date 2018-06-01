@@ -16,5 +16,21 @@ attr_reader :name, :songs, :guests
 
   end
 
+  def check_in_multi_guests(guests)
+
+     @guests += guests
+  end
+
+  def check_out_one_guest(guest)
+    removal = [guest]
+    @guests -= removal
+
+  end
+
+  def check_out_multi_guest(guests)
+    removal = guests
+    @guests -= removal
+  end
+
 
 end

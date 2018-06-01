@@ -11,6 +11,9 @@ class RoomTest < MiniTest::Test
 
     @room = Room.new("Room 1")
     @guest1 = Guest.new("Marti Pellow")
+    @guest2 = Guest.new("Dave")
+    @guest3 = Guest.new("Donatello")
+    @guest4 = Guest.new("Gordon")
 
 
   end
@@ -35,7 +38,23 @@ class RoomTest < MiniTest::Test
 
   end
 
+  def test_room_can_check_in_multiple_guests
+    @room.check_in_multi_guests([@guest1,@guest2,@guest3,@guest4])
+    assert_equal([@guest1,@guest2,@guest3,@guest4], @room.guests())
+
+  end
 
 
+  def test_room_can_check_out_one_guest
+    @room.check_in_multi_guests([@guest1,@guest2,@guest3,@guest4])
+    @room.check_out_one_guest(@guest2)
+    assert_equal([@guest1, @guest3, @guest4], @room.guests())
+  end
+
+  def test_room_can_check_out_multiple_guests
+    @room.check_in_multi_guests([@guest1,@guest2,@guest3,@guest4])
+    @room.check_out_multi_guest([@guest4,@guest2])
+    assert_equal([@guest1, @guest3], @room.guests())
+  end
 
 end
