@@ -9,9 +9,14 @@ require_relative("../guest.rb")
 class ClubTest < MiniTest::Test
 
   def setup
-    @room1 = Room.new("Rock", 5)
-    @room2 = Room.new("80s", 5)
-    @room3 = Room.new("Tunes from hell", 5)
+    @beers = Drinks.new("Beer", 4.0)
+    drinks = {@beers => 50}
+    @bar1 = Bar.new("Rock Bar", drinks)
+    @bar2 = Bar.new("80s Bar", drinks)
+    @bar3 = Bar.new("Hell Bar", drinks)
+    @room1 = Room.new("Rock", 5, @bar1)
+    @room2 = Room.new("80s", 5, @bar2)
+    @room3 = Room.new("Tunes from hell", 5, @bar3)
     @song1 = Song.new("Last Resort - Papa Roach")
     @song2 = Song.new("Real American - Rick Derringer")
     @song3 = Song.new("Voices - Disturbed")
@@ -130,6 +135,9 @@ class ClubTest < MiniTest::Test
     assert_equal(@rock, @room1.songs())
 
   end
+
+
+  
 
 
 

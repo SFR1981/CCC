@@ -3,13 +3,18 @@ require("minitest/rg")
 require_relative("../room.rb")
 require_relative("../song.rb")
 require_relative("../guest.rb")
+require_relative("../bar.rb")
+require_relative("../drinks.rb")
 
 
 class RoomTest < MiniTest::Test
 
   def setup
 
-    @room = Room.new("Room 1", 5)
+    @beers = Drinks.new("Beer", 4.0)
+    @drinks = {@beers => 50}
+    @bar = Bar.new("Hell Bar", @drinks)
+    @room = Room.new("Room 1", 5, @bar)
     @guest1 = Guest.new("Marti Pellow", 100.00)
     @guest2 = Guest.new("Dave", 25.00)
     @guest3 = Guest.new("Donatello", 50.00)
@@ -134,11 +139,29 @@ class RoomTest < MiniTest::Test
       @guest3.overwrite_favourite_song(@song3)
       @room.add_playlist(@playlist)
       @room.check_in_multi_guests([@guest1,@guest2,@guest3])
-      
+
       assert_equal(3, @room.whoo_count())
 
 
      end
+
+     def test_bar_is_in_room
+       assert_equal(@bar, @room.bar())
+
+     end
+     def test_stock_count
+       assert_equal(50, @room.bar.drinks[@beers])
+
+     end
+
+    def test_guests_can_buy_drinks_from_bar_in_room
+       @room.check_in_one_guest(@guest1)
+       @bar.sells_drink(@guest1, @beers)
+      assert_equal(49, @room.bar.drinks[@beers])
+      assert_equal(4.0, @room.bar.till())
+       assert_equal(96.00, @guest1.wallet())
+
+       end
 
 
 

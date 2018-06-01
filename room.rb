@@ -1,13 +1,14 @@
 class Room
-attr_reader :name, :songs, :guests, :capacity, :whoo_count
+attr_reader :name, :songs, :guests, :capacity, :whoo_count, :bar
 attr_writer :songs
-  def initialize(name, capacity)
+  def initialize(name, capacity, bar)
 
     @name = name
     @guests = []
     @songs = []
     @capacity = capacity
     @whoo_count = 0
+    @bar = bar
 
 
   end
@@ -31,7 +32,7 @@ attr_writer :songs
           guest.whoo()
           @whoo_count +=1
         end
-    
+
     end
 
      #@guests += guests
@@ -58,6 +59,8 @@ attr_writer :songs
     @songs += playlist
 
   end
+
+
 
 
 end
