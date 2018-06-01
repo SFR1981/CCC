@@ -40,6 +40,10 @@ attr_reader :rooms, :cost, :guests, :till
 
       removal = [guest]
       @guests -= removal
+      @rooms.each { |room| room.check_out_one_guest(guest) if room.guests.include?(guest)}
+      p "#{guest.name()} has left the club"
+      #   check_out_one_guest(guest) if room..guests().includes?(guest)
+      # end
 
   end
 

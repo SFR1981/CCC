@@ -42,6 +42,7 @@ attr_writer :songs
 
       removal = [guest]
       @guests -= removal
+      p "#{guest.name()} has left the #{self.name()} room"
 
   end
 

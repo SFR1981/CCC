@@ -114,7 +114,9 @@ class ClubTest < MiniTest::Test
 
   def test_customer_leaves
     @ccc.arriving_group([@guest1,@guest2,@guest3,@guest4,@guest5])
+    @room2.check_in_one_guest(@guest3)
     @ccc.leaving_guest(@guest3)
+    assert_equal([],@room2.guests())
     assert_equal([@guest1,@guest2,@guest4,@guest5],@ccc.guests())
 
 

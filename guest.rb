@@ -31,7 +31,9 @@ class Guest
   end
 
   def whoo
+    p "#{@name}: Whoo!"
     return "Whoo!"
+
   end
 
 
