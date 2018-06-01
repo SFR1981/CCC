@@ -5,7 +5,14 @@ attr_reader :name, :songs, :guests
     @name = name
     @guests = []
     @songs = []
-    
+
+
+  end
+
+
+  def check_in_one_guest(guest)
+
+    @guests << guest
 
   end
 
