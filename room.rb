@@ -60,6 +60,12 @@ attr_writer :songs
 
   end
 
+  def guests_visits_bar(guest, drink)
+    if @guests.include?(guest)
+      @bar.sells_drink(guest, drink)
+    end
+  end
+
 
 
 

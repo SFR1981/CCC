@@ -4,6 +4,8 @@ require_relative("../club.rb")
 require_relative("../room.rb")
 require_relative("../song.rb")
 require_relative("../guest.rb")
+require_relative("../drinks.rb")
+require_relative("../bar.rb")
 
 
 class ClubTest < MiniTest::Test
@@ -137,7 +139,24 @@ class ClubTest < MiniTest::Test
   end
 
 
-  
+  def test_club_can_track_total_revenue
+    @ccc.arriving_group([@guest1,@guest2,@guest3,@guest4,@guest5])
+    @room1.check_in_multi_guests([@guest1,@guest2])
+    @room2.check_in_multi_guests([@guest3,@guest4])
+    @room3.check_in_one_guest(@guest5)
+    @room1.guests_visits_bar(@guest1, @beers)
+    @room1.guests_visits_bar(@guest2, @beers)
+    @room2.guests_visits_bar(@guest3, @beers)
+    @room2.guests_visits_bar(@guest4, @beers)
+    @room3.guests_visits_bar(@guest5, @beers)
+    @room3.guests_visits_bar(@guest5, @beers)
+    assert_equal(49.00, @ccc.total_revenue())
+
+  end
+
+
+
+
 
 
 

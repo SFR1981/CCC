@@ -48,7 +48,17 @@ attr_reader :rooms, :cost, :guests, :till
     @guests -= removal
   end
 
+  def total_revenue
 
+    total_revenue = 0
+    total_revenue += @till
+
+    @rooms.each do |room|
+      total_revenue += room.bar.till()
+    end
+    return total_revenue
+
+  end
 
 
 end

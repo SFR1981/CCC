@@ -156,12 +156,21 @@ class RoomTest < MiniTest::Test
 
     def test_guests_can_buy_drinks_from_bar_in_room
        @room.check_in_one_guest(@guest1)
-       @bar.sells_drink(@guest1, @beers)
+       @room.guests_visits_bar(@guest1,@beers)
       assert_equal(49, @room.bar.drinks[@beers])
       assert_equal(4.0, @room.bar.till())
        assert_equal(96.00, @guest1.wallet())
 
-       end
+    end
+
+    def test_guests_can_not_buy_drinks_from_bar_in_room_they_are_not_inside
+
+       @room.guests_visits_bar(@guest1,@beers)
+      assert_equal(50, @room.bar.drinks[@beers])
+      assert_equal(0, @room.bar.till())
+       assert_equal(100.00, @guest1.wallet())
+
+    end
 
 
 
