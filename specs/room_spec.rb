@@ -9,7 +9,7 @@ class RoomTest < MiniTest::Test
 
   def setup
 
-    @room = Room.new("Room 1")
+    @room = Room.new("Room 1", "50")
     @guest1 = Guest.new("Marti Pellow")
     @guest2 = Guest.new("Dave")
     @guest3 = Guest.new("Donatello")
@@ -67,6 +67,10 @@ class RoomTest < MiniTest::Test
 
   end
 
+  def test_room_has_a_capacity
+    assert_equal("50", @room.capacity())
+
+  end
 
 
 
