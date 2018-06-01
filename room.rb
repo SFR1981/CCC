@@ -32,5 +32,10 @@ attr_reader :name, :songs, :guests
     @guests -= removal
   end
 
+  def add_song(song)
+    @songs << song
+
+  end
+
 
 end

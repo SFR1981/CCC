@@ -14,6 +14,10 @@ class RoomTest < MiniTest::Test
     @guest2 = Guest.new("Dave")
     @guest3 = Guest.new("Donatello")
     @guest4 = Guest.new("Gordon")
+    @song1 = Song.new("Last Resort - Papa Roach")
+    @song2 = Song.new("Real American - Rick Derringer")
+    @song3 = Song.new("Voices - Disturbed")
+    @song4 = Song.new("Demanufacture - Fear Factory")
 
 
   end
@@ -56,5 +60,15 @@ class RoomTest < MiniTest::Test
     @room.check_out_multi_guest([@guest4,@guest2])
     assert_equal([@guest1, @guest3], @room.guests())
   end
+
+  def test_room_can_have_songs_added
+    @room.add_song(@song2)
+    assert_equal([@song2], @room.songs())
+
+  end
+
+
+
+
 
 end
