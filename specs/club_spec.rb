@@ -17,7 +17,19 @@ class ClubTest < MiniTest::Test
     @song3 = Song.new("Voices - Disturbed")
     @song4 = Song.new("Demanufacture - Fear Factory")
     @rock = [@song1, @song2, @song3, @song4]
+    @song5 = Song.new("China in your hand - T'Pau")
+    @song6 = Song.new("Heaven is a place on Earth - Belinda Carlisle")
+    @song7 = Song.new("I think we're alone now - Tiffany")
+    @song8 = Song.new("A little respect - Erasure")
+    @eighties = [@song5, @song6, @song7, @song8]
+    @song9 = Song.new("I am the music man - Black lace")
+    @song10 = Song.new("Bat out of hell - Meatloaf")
+    @song11= Song.new("The time warp - O'Brien, Quinn, Campbell, Gray")
+    @song12 = Song.new("Summer nights - John Travolta & Olivia Newton-John")
+    @hell = [@song9, @song10, @song11, @song12]
     @room1.add_playlist(@rock)
+    @room2.add_playlist(@eighties)
+    @room3.add_playlist(@hell)
     @rooms = [@room1, @room2, @room3]
     @ccc = Club.new(@rooms, 5.00)
     @guest1 = Guest.new("Marti Pellow", 100.00)
@@ -84,6 +96,10 @@ class ClubTest < MiniTest::Test
     @ccc.arriving_group([@guest1,@guest2,@guest3,@guest4,@guest5])
     assert_equal(25.00, @ccc.till())
     assert_equal(95.00, @guest1.wallet())
+    assert_equal(20.00, @guest2.wallet())
+    assert_equal(45.00, @guest3.wallet())
+    assert_equal(15.00, @guest4.wallet())
+    assert_equal(15.00, @guest5.wallet())
 
 
 

@@ -25,7 +25,11 @@ attr_reader :rooms, :cost, :guests, :till
 
   def arriving_group(multiple_guests)
     multiple_guests.each do |guest|
-      @guests << guest if @guests.length() < @capacity
+      if guest.wallet() >= @cost
+        @guests << guest if @guests.length() < @capacity
+        guest.spend(@cost)
+        @till += @cost
+      end
     end
 
 
