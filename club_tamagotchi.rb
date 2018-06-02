@@ -134,47 +134,32 @@ def shuffle
   end
 end
 
-# def chaos
-#     bad_guys = [@guest8,@guest9,@guest10,@guest11,@guest12,@guest13,@guest14]
-#     bad_guys.each do |bad_guy|
-#       bad_guy.overwrite_favourite_song(@allsongs.shuffle.pop())
-#     end
-#     @ccc.arriving_group([@guest8,@guest9,@guest10,@guest11,@guest12,@guest13,@guest14])
-# end
-
-
-
-
-
-
 
 
 puts "Welcome to CC Caraoke! type 'y' to begin or anything else to quit. The fun ends when there are no guests left!"
+
 input = gets.chomp().downcase()
-  return if  input != "y"
-  puts "creating club"
-  setup()
 
-  until @ccc.guests == []
+return if  input != "y"
 
-    # p "#{@instructions}"
-    instructions
-    input = gets.chomp().downcase()
+puts "creating club"
 
-    twenty_minutes_later
+setup()
 
-    case input
+until @ccc.guests == []
+
+
+  instructions
+  input = gets.chomp().downcase()
+
+  twenty_minutes_later
+
+  case input
     when "q" then break
     when "s" then shuffle
-    when "c" then chaos
     when "a" then @ccc.guests.each { |guest| p "#{guest.name()} is here and they want to hear #{guest.favourite_song.title_and_artist}"}
     when "b" then @ccc.guests.each { |guest| p "#{guest.name()} has had #{guest.drinks_drank()} beers" }
     end
+
+  
   end
-
-
-
-
-#@rooms.each do |room|
-#      room.guests.each {|guest| p "#{guest.name()} is in the #{room.name()} room" }
-#      end
