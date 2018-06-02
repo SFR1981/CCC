@@ -19,6 +19,7 @@ attr_reader :rooms, :cost, :guests, :till
     @till += @cost
     guest.spend(@cost)
     @guests << guest
+    
 
 
   end
@@ -29,6 +30,7 @@ attr_reader :rooms, :cost, :guests, :till
         @guests << guest if @guests.length() < @capacity
         guest.spend(@cost)
         @till += @cost
+
       end
     end
 

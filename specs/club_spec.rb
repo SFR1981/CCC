@@ -178,5 +178,4 @@ class ClubTest < MiniTest::Test
 
 
 
-
 end

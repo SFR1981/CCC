@@ -46,7 +46,6 @@ attr_writer :songs
       @guests.delete(guest)
 
 
-      p "#{guest.name()} has left the #{self.name()} room #{@guests.length()} remain"
 
 
   end
@@ -54,9 +53,7 @@ attr_writer :songs
   def check_out_multi_guest(guests)
     removal = guests
     @guests -= removal
-    for guest in @guests
-      p "#{guest.name()} has left the #{self.name()} room #{@guests.length()} remain"
-    end
+    
   end
 
   def add_song(song)
