@@ -64,5 +64,17 @@ attr_reader :rooms, :cost, :guests, :till
 
   end
 
+  def what_room(guest)
+     for room in @rooms
+       if room.guests.include?(guest)
+         p "#{guest.name()} is in the #{room.name()} room"
+         return room
+       end
+     end
+  end
+
+
+
+
 
 end

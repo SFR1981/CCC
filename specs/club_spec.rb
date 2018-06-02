@@ -156,7 +156,23 @@ class ClubTest < MiniTest::Test
 
   end
 
+  def test_club_can_track_what_room_a_customer_is_in
+    @ccc.arriving_group([@guest1,@guest2,@guest3,@guest4,@guest5])
+    @room1.check_in_multi_guests([@guest1,@guest2])
+    @room2.check_in_multi_guests([@guest3,@guest4])
+    @room3.check_in_one_guest(@guest5)
+    assert_equal(@room1, @ccc.what_room(@guest2))
 
+  end
+
+   def test_guests_can_not_be_in_more_than_one_room
+     @ccc.arriving_group([@guest1,@guest2,@guest3,@guest4,@guest5])
+     @room1.check_in_multi_guests([@guest1,@guest2])
+     @room2.check_in_multi_guests([@guest3,@guest4])
+     @room3.check_in_multi_guests([@guest5,@guest1])
+     assert_equal(@room1, @ccc.what_room(@guest1))
+
+   end
 
 
 

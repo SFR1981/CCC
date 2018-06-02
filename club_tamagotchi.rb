@@ -48,10 +48,12 @@ def setup
   @guest4.overwrite_favourite_song(@allsongs.shuffle.pop())
   @guest5.overwrite_favourite_song(@allsongs.shuffle.pop())
   @guest6.overwrite_favourite_song(@allsongs.shuffle.pop())
+  @ccc.arriving_customer(@guest1)
+  @room1.check_in_one_guest(@guest1)
+  #@ccc.arriving_group([@guest1,@guest2,@guest3,@guest4,@guest5,@guest6])
 
-  @ccc.arriving_group([@guest1,@guest2,@guest3,@guest4,@guest5,@guest6])git add
 
-  @instructions = "Type 'a' to show who is in the club! Type 'r' to see who is in what room!"
+  @instructions = "Press 'a' to move time forward and see the guest's favourite songs. Press 'b' to move time forward and see how much beer everyone has had. Hit any other key just to move time forward. (hit 'q' to quit)"
   @count = 0
 
 end
@@ -59,38 +61,47 @@ end
 
 
 def twenty_minutes_later
-  @count += 1
+  p "total revenue is currently #{@ccc.total_revenue()}"
+
   @ccc.guests.each { |guest| @ccc.leaving_guest(guest) if guest.wallet() < 4}
+
   if @count % 3 == 0
     for room in @rooms
       for guest in room.guests
         room.guests_visits_bar(guest,@beers)
-        p guest.drinks_drank()
+        room.guest_wants_to_sing(guest)
+
       end
     end
   end
 
   if @count % 2 == 0
-    @rooms.each { |room| room.check_out_multi_guest([room.guests()]) }
+    @ccc.guests.each do |guest|
+      @ccc.what_room(guest).check_out_one_guest(guest)
+    end
+
 
     @ccc.guests.each do |guest|
       room = @rooms.shuffle.pop()
       room.check_in_one_guest(guest)
     end
 
+
   end
 
-  @ccc.guests.each { |guest| p "#{guest.name()} is feeling drunk and will leave soon!" if guest.drinks_drank > 8 }
+  @ccc.guests.each { |guest| p "#{guest.name()} has had #{guest.drinks_drank()} beers and is wasted. They will leave soon!" if guest.drinks_drank > 8 }
 
 
-    @ccc.guests.each { |guest| @ccc.leaving_guest(guest) if guest.drinks_drank > 9 }
+  @ccc.guests.each { |guest| @ccc.leaving_guest(guest) if guest.drinks_drank > 9 }
+
+  @count += 1
 end
 
 
 
 
-  puts "are you ready? type 'y' for yes or anything else to quit!"
-  input = gets.chomp().downcase()
+puts "are you ready? type 'y' for yes or anything else to quit!"
+input = gets.chomp().downcase()
   return if  input != "y"
   setup()
   puts "creating club"
@@ -105,14 +116,13 @@ end
     case input
     when "q" then break
     when "a" then @ccc.guests.each { |guest| p "#{guest.name()} is here and they want to hear #{guest.favourite_song.title_and_artist}"}
-    when "b" then move_person
-    when "r" then @rooms.each do |room|
-          room.guests.each {|guest| p "#{guest.name()} is in the #{room.name()} room" }
-          end
-
-
-
-
-    else return
+    when "b" then @ccc.guests.each { |guest| p "#{guest.name()} is here and they have had #{guest.drinks_drank()} beers" }
     end
   end
+
+
+
+
+#@rooms.each do |room|
+#      room.guests.each {|guest| p "#{guest.name()} is in the #{room.name()} room" }
+#      end

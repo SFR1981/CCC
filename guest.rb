@@ -10,7 +10,7 @@ class Guest
     @name = name
     @wallet = wallet
     #favourite = big_pile_of_songs.shuffle.pop() needs song obj
-    @favourite_song = ""
+    @favourite_song = nil
     @drinks_drank = 0
 
   end
@@ -33,6 +33,14 @@ class Guest
   def whoo
     p "#{@name}: Whoo!"
     return "Whoo!"
+
+  end
+
+  def sings(song)
+    p "#{@name}: I am singing #{song.title_and_artist()}"
+    #return "#{@name}: I am singing #{song.title_and_artist()}"
+
+
 
   end
 
