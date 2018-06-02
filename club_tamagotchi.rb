@@ -67,7 +67,6 @@ def setup
 
 
 
-  @instructions = "Press return to move time forward by twenty minutes. Other commands: 'a' shows favourite songs, 'b' shows how much beer everyone has had, 's' shuffles favourite songs and you can hit 'q' to quit"
   @count = 0
 
 end
